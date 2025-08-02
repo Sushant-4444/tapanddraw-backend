@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment Status</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    .status {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .loader {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #4CAF50;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="status">Verifying your payment... <span class="loader"></span></div>
+
+  <script>
+    // Get the order ID from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderid = urlParams.get('orderid') || window.location.pathname.split('/').pop();
+
+    fetch(`/api/payment/verify/${orderid}`, {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+      document.querySelector('.loader').style.display = 'none';
+      const statusDiv = document.querySelector('.status');
+      if (data.message === "Payment successful" || data.success) {
+        statusDiv.innerHTML = "✅ Payment Successful!";
+      } else {
+        statusDiv.innerHTML = "❌ Payment Failed or Cancelled";
+      }
+      })
+      .catch(err => {
+      document.querySelector('.loader').style.display = 'none';
+      document.querySelector('.status').innerHTML = "⚠️ Error verifying payment.";
+      });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "tapndraw",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js",
+    "build": "node build.js",
+    "test": "node test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.9.0",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.13.1",
+    "nodemailer": "^6.10.0",
+    "nodemon": "^3.1.9",
+    "pg-sdk-node": "https://phonepe.mycloudrepo.io/public/repositories/phonepe-pg-sdk-node/releases/v2/phonepe-pg-sdk-node.tgz",
+    "promisify": "^0.0.3",
+    "redis": "^4.7.0"
+  }
+}
